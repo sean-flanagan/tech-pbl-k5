@@ -9,6 +9,7 @@
 .editorconfig
 
 # Non-site project files currently in this folder
+.godot/
 project.godot
 roblox/
 *.import
