@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech-Integrated PBL for K–5 Teachers</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563EB;--blue-lt:#EFF6FF;
+  --teal:#0D9488;--teal-lt:#F0FDFA;
+  --amber:#F59E0B;--amber-lt:#FFFBEB;
+  --purple:#7C3AED;--purple-lt:#F5F3FF;
+  --red:#DC2626;--red-lt:#FEF2F2;
+  --text:#1E293B;--muted:#64748B;
+  --border:#E2E8F0;--bg:#F8FAFC;--white:#fff;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.12);
+  --r:12px;--r-lg:16px;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
+h1,h2,h3,h4{line-height:1.3;font-weight:700}
+h1{font-size:2.6rem}h2{font-size:1.875rem}h3{font-size:1.35rem}h4{font-size:1.1rem}
+p{color:var(--muted)}
+strong{color:var(--text)}
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+/* ACADEMIC STRIP */
+.acad-strip{background:linear-gradient(135deg,#0f1e3d,#1e3a5f);color:#fff;padding:10px 24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.acad-inner{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;align-items:center}
+.acad-item{display:flex;flex-direction:column;gap:1px;line-height:1.2}
+.acad-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.55)}
+.acad-val{font-size:.82rem;font-weight:600;color:#fff}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{font-weight:700;font-size:.9rem;color:var(--blue);text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:2px;list-style:none;flex-wrap:wrap}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.8rem;font-weight:600;padding:5px 9px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-lt);color:var(--blue)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;line-height:1}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:#0F766E}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#B91C1C}
+.btn-purple{background:var(--purple);color:#fff}.btn-purple:hover{background:#6D28D9}
+.btn-amber{background:var(--amber);color:#fff}.btn-amber:hover{background:#D97706}
+.btn-ghost{background:var(--bg);color:var(--text);border:1px solid var(--border)}.btn-ghost:hover{background:var(--border)}
+.btn-sm{padding:6px 13px;font-size:.78rem}
+
+/* CARDS */
+.card{background:var(--white);border-radius:var(--r);padding:26px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 11px;border-radius:20px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.b-blue{background:var(--blue-lt);color:var(--blue)}
+.b-teal{background:var(--teal-lt);color:var(--teal)}
+.b-amber{background:var(--amber-lt);color:#92400E}
+.b-purple{background:var(--purple-lt);color:var(--purple)}
+.b-red{background:var(--red-lt);color:var(--red)}
+
+/* SECTION HEADER */
+.sh{text-align:center;margin-bottom:48px}
+.sh p{max-width:580px;margin:10px auto 0;font-size:1rem}
+.sh-label{display:inline-block;padding:5px 14px;background:var(--blue-lt);color:var(--blue);border-radius:20px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,#1a3560 0%,#1E40AF 55%,#0D7E76 100%);color:#fff;padding:96px 0;text-align:center}
+#hero h1{color:#fff;max-width:820px;margin:0 auto 14px}
+.hero-sub{color:rgba(255,255,255,.85);font-size:1.15rem;max-width:580px;margin:0 auto 28px}
+.hero-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.hero-tag{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:500}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-hw{background:#fff;color:var(--blue);font-weight:700;padding:13px 26px;font-size:.95rem;border-radius:10px;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-hw:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-hw-out{background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff}.btn-hw-out:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+.h-stat .num{font-size:2rem;font-weight:800;color:#fff}
+.h-stat .lbl{font-size:.8rem;color:rgba(255,255,255,.7);margin-top:3px}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.detail-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.detail-list li{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border-radius:8px;font-size:.875rem}
+.detail-list .ico{font-size:1.2rem}
+
+/* OBJECTIVES */
+.obj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.obj-card{background:var(--white);border-radius:var(--r);padding:26px;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start}
+.obj-num{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0}
+.obj-card h4{margin-bottom:5px}
+.obj-card p{font-size:.875rem}
+
+/* COURSE MAP */
+.cmap{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.cmap-mod{background:var(--white);border:1px solid var(--border);padding:24px 20px;transition:all .2s;position:relative}
+.cmap-mod:first-child{border-radius:var(--r) 0 0 var(--r)}
+.cmap-mod:last-child{border-radius:0 var(--r) var(--r) 0}
+.cmap-mod:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:1.2rem;color:var(--muted);z-index:2}
+.cmap-mod:hover{background:var(--blue-lt);transform:translateY(-3px);box-shadow:var(--shadow)}
+.cmap-wk{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:6px}
+.cmap-mod h4{margin-bottom:6px;font-size:.95rem}
+.cmap-mod p{font-size:.78rem}
+.cmap-em{font-size:1.75rem;margin-bottom:10px}
+
+/* MODULE WRAPPER */
+.mod-wrap{padding:80px 0}
+.mod-hdr{display:flex;align-items:flex-start;gap:22px;margin-bottom:36px}
+.mod-num{width:60px;height:60px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:#fff;flex-shrink:0}
+.m1 .mod-num{background:var(--blue)}
+.m2 .mod-num{background:var(--teal)}
+.m3 .mod-num{background:var(--purple)}
+.m4 .mod-num{background:var(--red)}
+.mod-hdr-txt h2{margin-bottom:6px}
+.why-box{border-left:4px solid var(--blue);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:14px}
+.m1 .why-box{background:var(--blue-lt);border-color:var(--blue)}
+.m2 .why-box{background:var(--teal-lt);border-color:var(--teal)}
+.m3 .why-box{background:var(--purple-lt);border-color:var(--purple)}
+.m4 .why-box{background:var(--red-lt);border-color:var(--red)}
+.why-box p{color:var(--text);font-style:italic;font-size:.9rem}
+
+/* GOALS LIST */
+.goals{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+.goals li{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;background:var(--white);border-radius:8px;border:1px solid var(--border);font-size:.875rem;color:var(--text)}
+.goals .ck{color:var(--teal);flex-shrink:0;margin-top:2px}
+
+/* ACCORDION */
+.acc{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.acc-hdr{width:100%;background:var(--white);border:none;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--text);text-align:left;transition:background .2s}
+.acc-hdr:hover{background:var(--bg)}
+.acc-hdr.open{background:var(--blue-lt);color:var(--blue)}
+.acc-ico{transition:transform .3s;font-size:.8rem}
+.acc-hdr.open .acc-ico{transform:rotate(180deg)}
+.acc-body{display:none;padding:18px 22px;background:var(--bg);border-top:1px solid var(--border)}
+.acc-body.show{display:block}
+
+/* ACTIVITY BOX */
+.act-box{background:linear-gradient(135deg,var(--teal-lt),var(--blue-lt));border:2px solid var(--teal);border-radius:var(--r);padding:28px;margin:22px 0}
+.act-lbl{display:inline-flex;align-items:center;gap:5px;background:var(--teal);color:#fff;padding:3px 12px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.act-box h4{color:var(--text);margin-bottom:10px;font-size:1.05rem}
+.act-box p{color:var(--text)}
+.act-steps{list-style:none;counter-reset:st;margin:14px 0}
+.act-steps li{counter-increment:st;display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:.875rem;color:var(--text)}
+.act-steps li::before{content:counter(st);background:var(--teal);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+
+/* REFLECTION BOX */
+.ref-box{background:var(--amber-lt);border:2px solid var(--amber);border-radius:var(--r);padding:22px 26px;margin:22px 0}
+.ref-lbl{display:inline-flex;align-items:center;gap:5px;background:var(--amber);color:#fff;padding:3px 12px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.ref-box p{color:var(--text);font-style:italic;font-size:.9rem}
+
+/* CALLOUT */
+.callout{padding:14px 18px;border-radius:0 8px 8px 0;border-left:4px solid var(--blue);background:var(--blue-lt);margin:14px 0}
+.callout p{color:var(--text);font-size:.9rem}
+.callout.teal{background:var(--teal-lt);border-color:var(--teal)}
+.callout.amber{background:var(--amber-lt);border-color:var(--amber)}
+.callout.purple{background:var(--purple-lt);border-color:var(--purple)}
+.callout.red{background:var(--red-lt);border-color:var(--red)}
+
+/* COMPARISON TABLE */
+.cmp-tbl{width:100%;border-collapse:collapse;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin:20px 0}
+.cmp-tbl th{background:var(--blue);color:#fff;padding:13px 18px;text-align:left;font-size:.85rem}
+.cmp-tbl td{padding:12px 18px;font-size:.85rem;border-bottom:1px solid var(--border);background:var(--white)}
+.cmp-tbl tr:nth-child(even) td{background:var(--bg)}
+.cmp-tbl .row-hdr{font-weight:700;background:var(--blue-lt)!important;color:var(--blue)}
+
+/* RESOURCE CARD */
+.res-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:all .2s}
+.res-card:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.res-ico{font-size:1.4rem;flex-shrink:0}
+.res-info{flex:1}
+.res-info h4{font-size:.9rem;margin-bottom:3px}
+.res-info p{font-size:.78rem}
+
+/* TABS */
+.tabs{margin:22px 0}
+.tab-btns{display:flex;gap:3px;border-bottom:2px solid var(--border);flex-wrap:wrap}
+.tab-btn{padding:9px 18px;border:none;background:none;cursor:pointer;font-size:.83rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-pane{display:none;padding:22px;background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r)}
+.tab-pane.active{display:block}
+
+/* TOOL CARD */
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center;transition:all .2s}
+.tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.tool-ico{font-size:1.75rem;margin-bottom:8px}
+.tool-card h4{font-size:.88rem;margin-bottom:4px}
+.tool-card p{font-size:.76rem}
+
+/* SORT ACTIVITY */
+.sort-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sort-cards{display:flex;flex-direction:column;gap:8px}
+.sort-chip{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.8rem;cursor:pointer;transition:all .2s;color:var(--text)}
+.sort-chip:hover{box-shadow:var(--shadow);transform:translateX(3px)}
+.sort-col{background:var(--white);border-radius:var(--r);padding:14px;border:2px dashed var(--border);min-height:100px}
+.sort-col h5{font-size:.78rem;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.sort-col.pbl{border-color:var(--teal)}.sort-col.pbl h5{color:var(--teal)}
+.sort-col.no{border-color:var(--amber)}.sort-col.no h5{color:#B45309}
+
+/* RUBRIC */
+.rubric{width:100%;border-collapse:collapse;font-size:.8rem}
+.rubric th{background:var(--blue);color:#fff;padding:9px 13px;text-align:left}
+.rubric td{padding:9px 13px;border:1px solid var(--border);vertical-align:top}
+.rubric tr:nth-child(even) td{background:var(--bg)}
+.rubric td:first-child{font-weight:600;background:var(--blue-lt);color:var(--blue)}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:20px}
+.tl-item::before{content:'';position:absolute;left:-24px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--blue);border:2px solid var(--white);box-shadow:0 0 0 2px var(--blue)}
+.tl-item h4{font-size:.88rem;margin-bottom:2px}
+.tl-item p{font-size:.8rem}
+
+/* FEEDBACK PROTOCOL */
+.fb-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px}
+.fb-q{padding:11px 0;border-bottom:1px solid var(--border);font-size:.875rem;color:var(--text)}
+.fb-q:last-of-type{border-bottom:none}
+
+/* FINAL PROJECT SECTION */
+.fp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.fp-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:all .2s}
+.fp-card:hover{box-shadow:var(--shadow)}
+.fp-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:6px}
+.fp-card h4{margin-bottom:7px}
+.fp-card p{font-size:.85rem}
+
+/* SUCCESS CRITERIA */
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sc-item{padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border)}
+.sc-item .sc-lbl{font-weight:700;font-size:.83rem;color:var(--blue);margin-bottom:5px}
+.sc-item p{font-size:.78rem}
+
+/* FLEX UTILS */
+.flex{display:flex}.fw{flex-wrap:wrap}.g3{gap:12px}.g4{gap:16px}
+.mt2{margin-top:8px}.mt3{margin-top:12px}.mt4{margin-top:16px}.mt6{margin-top:24px}.mt8{margin-top:32px}
+.mb3{margin-bottom:12px}.mb4{margin-bottom:16px}.mb6{margin-bottom:24px}
+
+/* FOOTER */
+footer{background:var(--text);color:rgba(255,255,255,.7);padding:40px 0;text-align:center}
+footer p{color:rgba(255,255,255,.7);font-size:.85rem}
+.ft-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.ft-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem}
+.ft-links a:hover{color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  h1{font-size:1.75rem}h2{font-size:1.4rem}
+  .nav-links{display:none}
+  .ov-grid,.obj-grid,.grid-2,.grid-3,.grid-4,.cmap,.fp-grid,.sc-grid,.sort-wrap{grid-template-columns:1fr}
+  .cmap-mod:not(:last-child)::after{display:none}
+  .cmap-mod:first-child{border-radius:var(--r) var(--r) 0 0}
+  .cmap-mod:last-child{border-radius:0 0 var(--r) var(--r)}
+  .hero-stats{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ACADEMIC HEADER STRIP -->
+<div class="acad-strip">
+  <div class="acad-inner">
+    <div class="acad-item"><span class="acad-lbl">Designer</span><span class="acad-val">Sean Flanagan</span></div>
+    <div class="acad-item"><span class="acad-lbl">Course</span><span class="acad-val">EDET-6035 Advanced Instructional Design</span></div>
+    <div class="acad-item"><span class="acad-lbl">Instructor</span><span class="acad-val">Alena Rodick</span></div>
+    <div class="acad-item"><span class="acad-lbl">Term</span><span class="acad-val">Spring 2026</span></div>
+    <div class="acad-item"><span class="acad-lbl">Submission</span><span class="acad-val">Final Project</span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">📚 Tech-PBL K–5</a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#module1">Module 1</a></li>
+      <li><a href="#module2">Module 2</a></li>
+      <li><a href="#module3">Module 3</a></li>
+      <li><a href="#module4">Module 4</a></li>
+      <li><a href="#final-project">Final Project</a></li>
+      <li><a href="#resources">Resources</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-tags">
+      <span class="hero-tag">📅 4 Weeks</span>
+      <span class="hero-tag">🖥 Asynchronous</span>
+      <span class="hero-tag">👩‍🏫 K–5 Teachers</span>
+      <span class="hero-tag">🎓 Graduate PD Course</span>
+    </div>
+    <h1>Tech-Integrated Project-Based Learning<br>for K–5 Teachers</h1>
+    <p class="hero-sub">A four-week professional learning experience that helps elementary educators plan, analyze, and design authentic PBL with purpose-driven technology integration.</p>
+    <div class="hero-btns">
+      <a href="#module1" class="btn-hw">Start Module 1 →</a>
+      <a href="#overview" class="btn-hw btn-hw-out">Course Overview</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="num">4</div><div class="lbl">Modules</div></div>
+      <div class="h-stat"><div class="num">K–5</div><div class="lbl">Grade Levels</div></div>
+      <div class="h-stat"><div class="num">~4 hrs</div><div class="lbl">Per Week</div></div>
+      <div class="h-stat"><div class="num">100%</div><div class="lbl">Asynchronous</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview" style="background:var(--white)">
+  <div class="container">
+    <div class="ov-grid">
+      <div>
+        <span class="sh-label">About This Course</span>
+        <h2 style="margin:10px 0 14px">Built for Real Classrooms</h2>
+        <p>This four-week asynchronous professional development course guides K–5 teachers through the principles, tools, and design process for technology-integrated Project-Based Learning.</p>
+        <p style="margin-top:12px">You'll move from understanding what authentic PBL really looks like — and why it matters for young learners — to selecting and justifying tech tools, analyzing a real lesson, and designing your own mini-lesson ready for your classroom.</p>
+        <p style="margin-top:12px">Each module builds on the last, ending with a complete mini-lesson that includes assessment and UDL supports.</p>
+        <div class="flex fw g3 mt6">
+          <a href="#course-map" class="btn btn-primary">See Course Map</a>
+          <a href="#final-project" class="btn btn-ghost">View Final Project</a>
+        </div>
+      </div>
+      <ul class="detail-list">
+        <li><span class="ico">🕐</span><span><strong>Format:</strong> Fully asynchronous, self-paced within weekly windows</span></li>
+        <li><span class="ico">📅</span><span><strong>Duration:</strong> 4 weeks, approx. 3–4 hours per week</span></li>
+        <li><span class="ico">👥</span><span><strong>Audience:</strong> K–5 classroom teachers and instructional coaches</span></li>
+        <li><span class="ico">📋</span><span><strong>Prerequisites:</strong> None — open to all experience levels</span></li>
+        <li><span class="ico">🎯</span><span><strong>Final Deliverable:</strong> Complete tech-integrated PBL mini-lesson</span></li>
+        <li><span class="ico">💬</span><span><strong>Community:</strong> Peer discussion boards and protocol-based feedback</span></li>
+        <li><span class="ico">🧩</span><span><strong>Design Framework:</strong> UDL principles woven throughout</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives">
+  <div class="container">
+    <div class="sh">
+      <span class="sh-label">By the End of This Course</span>
+      <h2>Learning Objectives</h2>
+      <p>Four clear outcomes that connect each module to your classroom practice.</p>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-num">1</div>
+        <div>
+          <h4>Define Authentic PBL</h4>
+          <p style="font-size:.875rem">Distinguish real Project-Based Learning from traditional "projects," and explain the key design elements that make PBL authentic and rigorous for young learners.</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">2</div>
+        <div>
+          <h4>Select and Justify Tech Tools</h4>
+          <p style="font-size:.875rem">Identify and justify technology tools that meaningfully support inquiry, creation, feedback, and sharing — while addressing diverse learner needs through UDL.</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">3</div>
+        <div>
+          <h4>Analyze for Alignment</h4>
+          <p style="font-size:.875rem">Examine a sample tech-integrated PBL lesson for alignment between standards, technology use, student agency, and assessment using a structured audit protocol.</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">4</div>
+        <div>
+          <h4>Design a Complete Mini-Lesson</h4>
+          <p style="font-size:.875rem">Design a K–5 tech-integrated PBL mini-lesson that includes a driving question, standards alignment, tech tool justifications, an assessment plan, and UDL supports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE MAP -->
+<section id="course-map" style="background:var(--white)">
+  <div class="container">
+    <div class="sh">
+      <span class="sh-label">Your Learning Journey</span>
+      <h2>Course Map</h2>
+      <p>Four sequential modules, each building the skills you need for the final design project.</p>
+    </div>
+    <div class="cmap">
+      <div class="cmap-mod">
+        <div class="cmap-em">🔍</div>
+        <div class="cmap-wk">Week 1</div>
+        <h4>What Is PBL?</h4>
+        <p style="margin:6px 0 14px">Understand core PBL elements and distinguish authentic PBL from traditional projects</p>
+        <a href="#module1" class="btn btn-primary btn-sm">Go →</a>
+      </div>
+      <div class="cmap-mod">
+        <div class="cmap-em">💻</div>
+        <div class="cmap-wk">Week 2</div>
+        <h4>Tech Supports PBL</h4>
+        <p style="margin:6px 0 14px">Select and justify tools for inquiry, creation, feedback, and sharing with UDL in mind</p>
+        <a href="#module2" class="btn btn-teal btn-sm">Go →</a>
+      </div>
+      <div class="cmap-mod">
+        <div class="cmap-em">🔬</div>
+        <div class="cmap-wk">Week 3</div>
+        <h4>Analyze a Lesson</h4>
+        <p style="margin:6px 0 14px">Audit a real tech-integrated PBL lesson for alignment, agency, and assessment</p>
+        <a href="#module3" class="btn btn-purple btn-sm">Go →</a>
+      </div>
+      <div class="cmap-mod">
+        <div class="cmap-em">✏️</div>
+        <div class="cmap-wk">Week 4</div>
+        <h4>Design Your Lesson</h4>
+        <p style="margin:6px 0 14px">Create a complete K–5 tech PBL mini-lesson with assessment and UDL supports</p>
+        <a href="#module4" class="btn btn-red btn-sm">Go →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 1 ===== -->
+<section id="module1" class="mod-wrap m1" style="background:#F8FBFF">
+  <div class="container">
+    <div class="mod-hdr">
+      <div class="mod-num">1</div>
+      <div class="mod-hdr-txt">
+        <div class="flex fw g3 mb4"><span class="badge b-blue">Week 1</span><span class="badge b-teal">Foundational</span></div>
+        <h2>What Is Project-Based Learning?</h2>
+        <div class="why-box">
+          <p><strong>Why this matters:</strong> Many teachers have designed "projects" but haven't experienced or designed authentic PBL. Before we can integrate technology well, we need a shared understanding of what PBL really is — and what it is not. This module builds that foundation by distinguishing authentic PBL from a project-as-culminating-activity.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mb4">Module Learning Goals</h3>
+    <ul class="goals mb6">
+      <li><span class="ck">✓</span>Define PBL and identify its core design elements: driving question, sustained inquiry, authenticity, student voice, critique and revision, and public product</li>
+      <li><span class="ck">✓</span>Distinguish authentic PBL from a traditional project-as-add-on activity using specific criteria</li>
+      <li><span class="ck">✓</span>Analyze a classroom example and identify what makes it PBL — or not — with evidence</li>
+      <li><span class="ck">✓</span>Reflect on your own past experience designing or participating in project work</li>
+    </ul>
+
+    <h3 class="mb4">Learning Materials</h3>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">📖 Readings: What Makes PBL Different? <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <div class="grid-2" style="gap:12px">
+          <div class="res-card">
+            <span class="res-ico">📄</span>
+            <div class="res-info"><h4>PBLWorks: "What Is Project Based Learning?"</h4><p>Core definition and Gold Standard elements from the Buck Institute for Education</p></div>
+            <a class="btn btn-ghost btn-sm" href="https://www.pblworks.org/what-is-pbl" target="_blank" rel="noopener">View Resource</a>
+          </div>
+          <div class="res-card">
+            <span class="res-ico">📄</span>
+            <div class="res-info"><h4>Larmer & Mergendoller: "Why We Changed Our Model of the 8 Essentials"</h4><p>BIE blog post on the evolution of PBL design thinking</p></div>
+            <a class="btn btn-ghost btn-sm" href="https://my.pblworks.org/resource/blog/why_we_changed_our_model_of_the_8_essential_elements_of_pbl" target="_blank" rel="noopener">View Resource</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">🎬 Videos: PBL in Elementary Classrooms <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <div class="grid-2" style="gap:12px">
+          <div class="res-card">
+            <span class="res-ico">▶️</span>
+            <div class="res-info"><h4>Edutopia: "A Project-Based Approach to Teaching Elementary Science"</h4><p>Watch for driving questions, student voice, and authentic audiences in a 3rd-grade classroom</p></div>
+            <a class="btn btn-ghost btn-sm" href="https://www.edutopia.org/video/project-based-approach-teaching-elementary-science/" target="_blank" rel="noopener">Watch Video</a>
+          </div>
+          <div class="res-card">
+            <span class="res-ico">▶️</span>
+            <div class="res-info"><h4>PBLWorks: "Gold Standard PBL — Essential Project Design Elements"</h4><p>Introduction to the seven essential project design elements</p></div>
+            <a class="btn btn-ghost btn-sm" href="https://www.pblworks.org/what-is-pbl/gold-standard-project-design" target="_blank" rel="noopener">Watch Video</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt8 mb4">Core Concept: PBL vs. Traditional Projects</h3>
+    <div class="callout">
+      <p><strong>The key question:</strong> Is the project the <em>end</em> — or the <em>vehicle</em>? In authentic PBL, the project <em>is</em> the learning. Students develop skills and content knowledge <em>through</em> sustained inquiry, not after instruction is complete.</p>
+    </div>
+
+    <table class="cmp-tbl">
+      <thead>
+        <tr><th>Feature</th><th>✅ Authentic PBL</th><th>❌ Traditional "Project"</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-hdr">Purpose</td><td>Project is the vehicle for learning</td><td>Project is a culminating activity after instruction</td></tr>
+        <tr><td class="row-hdr">Driving Question</td><td>Open, challenging, real-world problem</td><td>Directions for completing a product</td></tr>
+        <tr><td class="row-hdr">Student Role</td><td>Active inquirer with voice and choice</td><td>Following teacher-prescribed steps</td></tr>
+        <tr><td class="row-hdr">Inquiry</td><td>Sustained investigation, research, iteration</td><td>Limited to teacher-provided information</td></tr>
+        <tr><td class="row-hdr">Audience</td><td>Authentic audience beyond the teacher</td><td>Teacher only</td></tr>
+        <tr><td class="row-hdr">Reflection</td><td>Built in throughout the process</td><td>Minimal or only at the end</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="mt8 mb4">Classroom Example: Grade 2 Community Helpers</h3>
+    <div class="grid-2">
+      <div class="card" style="border-top:4px solid var(--red)">
+        <span class="badge b-red mb4">❌ Traditional Project</span>
+        <h4>Community Helpers Poster</h4>
+        <p style="margin:10px 0;font-size:.875rem"><em>After reading about community helpers, students create a poster showing three community helpers and what they do. Posters are graded by the teacher and hung on the bulletin board.</em></p>
+        <div class="callout red">
+          <p><strong>What's missing:</strong> No driving question. No real audience. No sustained inquiry. No student choice in focus, format, or presentation. The project comes <em>after</em> learning ends.</p>
+        </div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--teal)">
+        <span class="badge b-teal mb4">✅ Authentic PBL</span>
+        <h4>Community Helpers Need Our Help</h4>
+        <p style="margin:10px 0;font-size:.875rem"><em><strong>Driving Question:</strong> "How can we help the people who help us?" Students investigate a local community helper of their choice, identify a real need, and create a product — a video guide, a thank-you book, or an informational brochure — for an authentic audience such as local firefighters or the school nurse.</em></p>
+        <div class="callout teal">
+          <p><strong>What's here:</strong> Open driving question, sustained inquiry, student voice and choice, real audience, iterative feedback, reflection throughout.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SORTING ACTIVITY -->
+    <div class="act-box mt8" style="border-color:var(--blue);background:linear-gradient(135deg,var(--blue-lt),var(--teal-lt))">
+      <div class="act-lbl" style="background:var(--blue)">🎯 Module 1 Activity</div>
+      <h4>PBL or Not PBL? Sorting Task</h4>
+      <p>Read each classroom scenario. Decide: Is this authentic PBL, or a traditional project? Click a card to toggle its classification, then compare your reasoning with a peer in the discussion forum.</p>
+      <div class="sort-wrap mt4">
+        <div class="sort-cards" id="sort-cards">
+          <div class="sort-chip" onclick="toggleSort(this)">📝 Grade 3 students research rainforest animals, then write a report to share with the teacher for a grade.</div>
+          <div class="sort-chip" onclick="toggleSort(this)">🌱 Grade 1 students investigate "How can we make our school garden grow better?" and present recommendations to the custodial staff.</div>
+          <div class="sort-chip" onclick="toggleSort(this)">📊 Grade 5 students track local weather data for a week and create a graph to display in the hallway.</div>
+          <div class="sort-chip" onclick="toggleSort(this)">🏘 Grade 2 students answer "How can we make our neighborhood safer for kids?" by designing a proposal for the city planning office.</div>
+          <div class="sort-chip" onclick="toggleSort(this)">📚 Grade 4 students read about the water cycle, then complete a worksheet and label a diagram.</div>
+          <div class="sort-chip" onclick="toggleSort(this)">🎙 Grade K students investigate "What do plants need?" over three weeks and share findings with parents at a science fair.</div>
+        </div>
+        <div>
+          <div class="sort-col pbl mb3"><h5>✅ Mark as PBL</h5><p style="font-size:.76rem;color:var(--muted)">Click a card to classify it</p></div>
+          <div class="sort-col no"><h5>❌ Mark as Not PBL</h5><p style="font-size:.76rem;color:var(--muted)">Click a card to classify it</p></div>
+        </div>
+      </div>
+      <div class="flex fw g3 mt4">
+        <button class="btn btn-primary btn-sm" onclick="revealAnswers()">Reveal Answer Key</button>
+        <a class="btn btn-ghost btn-sm" href="https://my.pblworks.org/resource/document/pbl_essential_elements_checklist" target="_blank" rel="noopener">Download Activity Sheet</a>
+        <a class="btn btn-ghost btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Go to Discussion Forum</a>
+      </div>
+      <div id="answer-key" style="display:none;margin-top:14px;padding:14px;background:var(--white);border-radius:8px;font-size:.82rem;color:var(--text)">
+        <strong>Answer Key:</strong><br>
+        ✅ PBL: School garden inquiry (Grade 1) · Safer neighborhood proposal (Grade 2) · Plants investigation with science fair (Grade K)<br>
+        ❌ Not PBL: Rainforest report for teacher (Grade 3) · Weather graph display only (Grade 5) · Water cycle worksheet (Grade 4)
+      </div>
+    </div>
+
+    <div class="ref-box">
+      <div class="ref-lbl">💭 Module 1 Reflection</div>
+      <p>"Think about a 'project' you have assigned or completed in the past. Using the PBL framework, was it authentic PBL? What one element — a driving question, a real audience, or more student voice — could have made it more authentic? Post your reflection (150–200 words) to the Module 1 discussion board."</p>
+      <div class="mt4"><a class="btn btn-amber btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Post My Reflection</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 2 ===== -->
+<section id="module2" class="mod-wrap m2" style="background:var(--white)">
+  <div class="container">
+    <div class="mod-hdr">
+      <div class="mod-num">2</div>
+      <div class="mod-hdr-txt">
+        <div class="flex fw g3 mb4"><span class="badge b-teal">Week 2</span><span class="badge b-amber">Tech Integration</span></div>
+        <h2>How Technology Supports PBL</h2>
+        <div class="why-box">
+          <p><strong>Why this matters:</strong> Technology in PBL should do more than digitize a worksheet. When chosen intentionally, tech tools can deepen inquiry, expand creation options, enable richer feedback, and open authentic sharing audiences far beyond the classroom. In this module, you'll map tools to purpose — and connect every choice to UDL.</p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="goals mb6">
+      <li><span class="ck">✓</span>Identify four phases of technology use in PBL: Inquiry, Creation, Feedback, and Sharing</li>
+      <li><span class="ck">✓</span>Match specific tools to specific PBL purposes and justify those choices with evidence</li>
+      <li><span class="ck">✓</span>Apply UDL principles to technology tool selection for diverse K–5 learners</li>
+      <li><span class="ck">✓</span>Evaluate whether a technology choice adds instructional value or creates "tech for tech's sake"</li>
+    </ul>
+
+    <div class="callout teal">
+      <p><strong>The core principle:</strong> Ask not "How can I use this tool?" but "What does my students' learning require that this tool supports?" Technology should lower barriers, deepen inquiry, and expand what students can do — not add complexity without purpose.</p>
+    </div>
+
+    <h3 class="mt8 mb4">The Four Phases: Technology Framework</h3>
+    <div class="tabs">
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="switchTab(this,'t2-inq')">🔍 Inquiry</button>
+        <button class="tab-btn" onclick="switchTab(this,'t2-cre')">🛠 Creation</button>
+        <button class="tab-btn" onclick="switchTab(this,'t2-fb')">💬 Feedback</button>
+        <button class="tab-btn" onclick="switchTab(this,'t2-sh')">📣 Sharing</button>
+      </div>
+      <div id="tab-t2-inq" class="tab-pane active">
+        <p class="mb4"><strong>Inquiry tools</strong> help students research, gather information, ask questions, and build background knowledge in authentic ways.</p>
+        <div class="grid-3">
+          <div class="tool-card"><div class="tool-ico">🔍</div><h4>Google Slides / Docs</h4><p>Collaborative research notes and shared question boards</p><div class="mt3"><span class="badge b-blue">Research</span></div></div>
+          <div class="tool-card"><div class="tool-ico">📹</div><h4>PBS LearningMedia</h4><p>Curated, age-appropriate video inquiry sources</p><div class="mt3"><span class="badge b-teal">Video</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🗺</div><h4>Padlet</h4><p>Wonder walls, driving question brainstorms, collective note boards</p><div class="mt3"><span class="badge b-amber">Collaborative</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🌐</div><h4>Google Earth / Maps</h4><p>Investigate real places, community geography, environmental data</p><div class="mt3"><span class="badge b-blue">Geospatial</span></div></div>
+          <div class="tool-card"><div class="tool-ico">📊</div><h4>Nearpod / Pear Deck</h4><p>Interactive delivery and real-time inquiry check-ins</p><div class="mt3"><span class="badge b-teal">Interactive</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎙</div><h4>Flip</h4><p>Student-led questioning and video wonder journals</p><div class="mt3"><span class="badge b-amber">Voice</span></div></div>
+        </div>
+      </div>
+      <div id="tab-t2-cre" class="tab-pane">
+        <p class="mb4"><strong>Creation tools</strong> support students in making something that demonstrates learning — giving them agency over format, medium, and expression.</p>
+        <div class="grid-3">
+          <div class="tool-card"><div class="tool-ico">📚</div><h4>Book Creator</h4><p>Multimodal digital books with text, image, audio, and video</p><div class="mt3"><span class="badge b-blue">Publishing</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎬</div><h4>WeVideo / iMovie</h4><p>Student documentary and explainer video creation</p><div class="mt3"><span class="badge b-teal">Video</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎨</div><h4>Canva for Education</h4><p>Infographics, posters, presentations — real-world design formats</p><div class="mt3"><span class="badge b-amber">Design</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🗂</div><h4>Google Slides / Sites</h4><p>Interactive presentations and student-built websites</p><div class="mt3"><span class="badge b-blue">Presentation</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🌿</div><h4>Seesaw</h4><p>Digital portfolios combining voice, drawing, photo, and writing</p><div class="mt3"><span class="badge b-teal">Portfolio</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🧩</div><h4>Scratch Jr. / Scratch</h4><p>Coding and interactive story creation for grades K–5</p><div class="mt3"><span class="badge b-purple">Coding</span></div></div>
+        </div>
+      </div>
+      <div id="tab-t2-fb" class="tab-pane">
+        <p class="mb4"><strong>Feedback tools</strong> support structured critique and revision — making feedback visible, specific, and actionable for students.</p>
+        <div class="grid-3">
+          <div class="tool-card"><div class="tool-ico">📝</div><h4>Google Docs Comments</h4><p>Inline peer feedback and revision tracking on written work</p><div class="mt3"><span class="badge b-blue">Writing</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎥</div><h4>Flip</h4><p>Video feedback responses — ideal for young learners who struggle with written critique</p><div class="mt3"><span class="badge b-teal">Video</span></div></div>
+          <div class="tool-card"><div class="tool-ico">📋</div><h4>Google Forms</h4><p>Structured peer review with sentence starters and rating scales</p><div class="mt3"><span class="badge b-amber">Forms</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🌿</div><h4>Seesaw</h4><p>Peer and teacher feedback attached directly to student work artifacts</p><div class="mt3"><span class="badge b-teal">Portfolio</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎞</div><h4>Loom</h4><p>Teacher video feedback — screencast comments on digital student work</p><div class="mt3"><span class="badge b-blue">Teacher</span></div></div>
+          <div class="tool-card"><div class="tool-ico">📡</div><h4>Mentimeter</h4><p>Anonymous class-wide formative feedback during sharing rehearsals</p><div class="mt3"><span class="badge b-amber">Formative</span></div></div>
+        </div>
+      </div>
+      <div id="tab-t2-sh" class="tab-pane">
+        <p class="mb4"><strong>Sharing tools</strong> expand student audiences beyond the classroom, giving products authentic purpose and public accountability.</p>
+        <div class="grid-3">
+          <div class="tool-card"><div class="tool-ico">📚</div><h4>Book Creator Published</h4><p>Publish digital books for parents, community, or classroom library</p><div class="mt3"><span class="badge b-blue">Publishing</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🌐</div><h4>Google Sites</h4><p>Student-built websites shared with authentic audiences</p><div class="mt3"><span class="badge b-teal">Web</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🎙</div><h4>Anchor / Podcast</h4><p>Student podcasts shared with families or the school community</p><div class="mt3"><span class="badge b-amber">Audio</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🖥</div><h4>Zoom / Meet</h4><p>Virtual presentations to guest experts or community stakeholders</p><div class="mt3"><span class="badge b-blue">Live</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🌿</div><h4>Seesaw Parent View</h4><p>Portfolio sharing directly to families with commenting enabled</p><div class="mt3"><span class="badge b-teal">Families</span></div></div>
+          <div class="tool-card"><div class="tool-ico">🏫</div><h4>School Blog / Website</h4><p>School-wide audience for student-created content and products</p><div class="mt3"><span class="badge b-amber">School</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt8 mb4">Connecting Technology to UDL</h3>
+    <div class="callout purple">
+      <p><strong>UDL Principle:</strong> Universal Design for Learning asks us to provide multiple means of representation, action &amp; expression, and engagement. Technology is a natural lever for UDL — but only when selected with learner variability in mind, not added as an afterthought.</p>
+    </div>
+    <div class="grid-3 mt4">
+      <div class="card"><h4>🧠 Representation</h4><p style="margin-top:8px;font-size:.875rem">Text-to-speech, captioned video, and visual organizers give students multiple ways to access content regardless of reading level or language background</p></div>
+      <div class="card"><h4>✍️ Action &amp; Expression</h4><p style="margin-top:8px;font-size:.875rem">Book Creator, Seesaw, and WeVideo let students show what they know through drawing, voice recording, video, or text — on their own terms</p></div>
+      <div class="card"><h4>💡 Engagement</h4><p style="margin-top:8px;font-size:.875rem">Driving question boards, Padlet, and Flip invite curiosity, student choice, and collaborative investment in the real-world learning challenge</p></div>
+    </div>
+
+    <div class="act-box mt8" style="border-color:var(--teal)">
+      <div class="act-lbl">🎯 Module 2 Activity</div>
+      <h4>Tool Selection Justification Chart</h4>
+      <p>Choose a grade level (K–5) and a general PBL topic you might teach. For each of the four phases, identify one technology tool and write a 1–2 sentence justification connecting the tool to the phase AND a UDL principle.</p>
+      <ol class="act-steps mt4">
+        <li>Select your grade level and PBL topic (write these at the top of your chart)</li>
+        <li>For each of the four phases, choose one tool from the framework above</li>
+        <li>Write: <em>"I chose [tool] for the [phase] phase because [rationale]. This supports UDL by [connection]."</em></li>
+        <li>Review: Does each tool have a clear purpose? Is any phase over-relying on the same tool?</li>
+        <li>Submit your completed chart to the Module 2 assignment dropbox</li>
+      </ol>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-teal btn-sm" href="https://my.pblworks.org/resource/project-planner" target="_blank" rel="noopener">Download Tool Chart Template</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.canva.com/education/teachers/" target="_blank" rel="noopener">Submit Assignment</a>
+      </div>
+    </div>
+
+    <div class="ref-box">
+      <div class="ref-lbl">💭 Module 2 Reflection</div>
+      <p>"Describe a technology tool you currently use or have used in your classroom. Was it serving a clear PBL purpose, or was it 'tech for tech's sake'? In 150–200 words, re-evaluate that tool using the four-phase framework and UDL lens from this module."</p>
+      <div class="mt4"><a class="btn btn-amber btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Post My Reflection</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 3 ===== -->
+<section id="module3" class="mod-wrap m3" style="background:#FAFAFA">
+  <div class="container">
+    <div class="mod-hdr">
+      <div class="mod-num">3</div>
+      <div class="mod-hdr-txt">
+        <div class="flex fw g3 mb4"><span class="badge b-purple">Week 3</span><span class="badge b-teal">Analysis</span></div>
+        <h2>Analyze a Tech-Integrated PBL Lesson</h2>
+        <div class="why-box">
+          <p><strong>Why this matters:</strong> Before you design your own lesson, you need the ability to recognize quality alignment between standards, learning goals, technology choices, and assessment. This module gives you a structured lens — the Lesson Audit Protocol — to evaluate a real classroom example and sharpen your own design eye.</p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="goals mb6">
+      <li><span class="ck">✓</span>Apply the Lesson Audit Protocol to a sample K–5 tech-integrated PBL lesson</li>
+      <li><span class="ck">✓</span>Identify alignment between standards, driving question, technology, student agency, and assessment</li>
+      <li><span class="ck">✓</span>Recognize strengths and suggest specific, evidence-based improvements</li>
+      <li><span class="ck">✓</span>Practice giving structured, professional feedback using the critique protocol</li>
+    </ul>
+
+    <h3 class="mb4">Featured Lesson: Grade 4 Water Footprint Audit</h3>
+    <div class="card" style="border-top:4px solid var(--purple);margin-bottom:22px">
+      <div class="flex fw g3 mb4">
+        <span class="badge b-purple">Grade 4</span>
+        <span class="badge b-blue">Science + ELA</span>
+        <span class="badge b-teal">3 Weeks</span>
+      </div>
+      <h4 style="font-size:1.1rem;margin-bottom:8px">How Much Water Does Our School Use — and Can We Change It?</h4>
+      <p style="margin-bottom:14px"><strong>Driving Question:</strong> <em>"How can we, as water scientists, reduce our school's water footprint and share our findings with our community?"</em></p>
+      <div class="grid-2">
+        <div>
+          <h4 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">Lesson Overview</h4>
+          <p style="font-size:.875rem">Grade 4 students investigate their school's water usage over three weeks. They collect data, analyze environmental impact, and create a public-facing recommendation report for school administration. The project culminates in a live presentation to the principal and custodial staff.</p>
+        </div>
+        <div>
+          <h4 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">Technology Used</h4>
+          <ul style="font-size:.875rem;list-style:none;display:flex;flex-direction:column;gap:6px">
+            <li>📊 Google Sheets — data collection and graphing</li>
+            <li>🎨 Canva — infographic design for final report</li>
+            <li>📝 Google Docs — collaborative research notes</li>
+            <li>🎙 Flip — video check-in reflections throughout</li>
+            <li>🌍 Water Footprint Calculator (online tool)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mb4">Lesson Audit Protocol</h3>
+    <p class="mb4">For each of the six audit dimensions, identify: <strong>Evidence</strong> (what's present in the lesson), <strong>Rating</strong> (Strong / Developing / Missing), and <strong>Suggestion</strong> (one specific improvement).</p>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)" style="background:var(--purple-lt);color:var(--purple)">📋 View Full Audit Rubric <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <table class="rubric">
+          <thead><tr><th>Audit Dimension</th><th>Strong (3)</th><th>Developing (2)</th><th>Missing (1)</th></tr></thead>
+          <tbody>
+            <tr><td>Driving Question</td><td>Open, challenging, real-world; connects standards and authentic problem</td><td>Present but leading or closed; partially connects to real world</td><td>Absent or replaced by directions</td></tr>
+            <tr><td>Standards Alignment</td><td>Clear, explicit alignment to 2+ standards across subjects</td><td>One standard addressed; connection to project unclear</td><td>No standards referenced</td></tr>
+            <tr><td>Tech Justification</td><td>Each tool serves a specific PBL phase; UDL connections evident</td><td>Tools present but purpose is implicit or decorative</td><td>Technology is add-on with no connection to learning goals</td></tr>
+            <tr><td>Student Agency</td><td>Students have meaningful voice/choice in process, product, or audience</td><td>Limited choices offered; teacher direction dominates</td><td>All steps are teacher-prescribed</td></tr>
+            <tr><td>Assessment Plan</td><td>Formative and summative assessment embedded; criteria visible</td><td>Final product assessed; process feedback minimal</td><td>Assessment is absent or only a grade at the end</td></tr>
+            <tr><td>UDL Supports</td><td>Multiple means of representation, expression, and engagement built in</td><td>One UDL principle addressed; others absent</td><td>No UDL considerations evident</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h4 class="mt6 mb4">Sample Analysis: Water Footprint Lesson</h4>
+    <div class="grid-2">
+      <div class="card" style="border-left:4px solid var(--teal)">
+        <span class="badge b-teal mb4">✅ Strength</span>
+        <h4>Driving Question — Strong (3)</h4>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Evidence:</strong> "How can we, as water scientists, reduce our school's water footprint?" is open-ended, real-world, standards-connected, and positions students as expert inquirers.</p>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Suggestion:</strong> Invite students to help refine the driving question in Week 1 to increase ownership and investment.</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--purple)">
+        <span class="badge b-purple mb4">⚠️ Growth Area</span>
+        <h4>UDL Supports — Developing (2)</h4>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Evidence:</strong> Canva and Flip provide multimodal expression options. However, the lesson does not explicitly address representation for students with reading challenges or language support needs.</p>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Suggestion:</strong> Add text-to-speech in Google Docs, visual vocabulary guides, and sentence frames for ELL students during research.</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--blue)">
+        <span class="badge b-blue mb4">✅ Strength</span>
+        <h4>Technology Justification — Strong (3)</h4>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Evidence:</strong> Each tool connects to a specific phase: Sheets for data inquiry, Docs for collaborative research, Canva for the final product, Flip for ongoing reflection.</p>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Suggestion:</strong> Explicitly map tools to phases in the lesson plan so students understand <em>why</em> they are using each tool.</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber)">
+        <span class="badge b-amber mb4">⚠️ Growth Area</span>
+        <h4>Student Agency — Developing (2)</h4>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Evidence:</strong> Students investigate a shared topic but are given the final format (infographic report). Limited choice in how findings are presented.</p>
+        <p style="font-size:.875rem;margin-top:8px"><strong>Suggestion:</strong> Offer a product choice board: infographic, video report, podcast, or live presentation — each meeting the same success criteria.</p>
+      </div>
+    </div>
+
+    <div class="act-box mt8" style="background:linear-gradient(135deg,var(--purple-lt),var(--blue-lt));border-color:var(--purple)">
+      <div class="act-lbl" style="background:var(--purple)">🎯 Module 3 Activity</div>
+      <h4>Complete a Full Lesson Audit</h4>
+      <p>Using the Lesson Audit Protocol, complete a written audit of the Grade 4 Water Footprint lesson. Submit your completed audit with evidence, ratings, and at least two specific improvement suggestions.</p>
+      <ol class="act-steps mt4">
+        <li>Download the Lesson Audit Protocol template</li>
+        <li>Read the full Water Footprint lesson plan in the resource bank</li>
+        <li>Complete all six audit dimensions with: evidence, rating (1–3), and suggestion</li>
+        <li>Write a brief summary: What is this lesson's greatest strength? What one change would have the most impact?</li>
+        <li>Submit your completed audit to the Module 3 dropbox</li>
+      </ol>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-purple btn-sm" href="https://my.pblworks.org/resource/document/pbl_essential_elements_checklist" target="_blank" rel="noopener">Download Audit Template</a>
+        <a class="btn btn-ghost btn-sm" href="https://watercalculator.org/resource/water-footprint-lessons/" target="_blank" rel="noopener">View Full Lesson Plan</a>
+        <a class="btn btn-ghost btn-sm" href="https://watercalculator.org/educational-resources/for-teachers/" target="_blank" rel="noopener">Submit Audit</a>
+      </div>
+    </div>
+
+    <div class="ref-box">
+      <div class="ref-lbl">💭 Module 3 Reflection</div>
+      <p>"After completing the lesson audit, what dimension surprised you the most — either because the lesson was stronger than expected, or weaker? In 150–200 words, explain what you noticed and how this audit process will inform how you design your own lesson in Module 4."</p>
+      <div class="mt4"><a class="btn btn-amber btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Post My Reflection</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 4 ===== -->
+<section id="module4" class="mod-wrap m4" style="background:var(--white)">
+  <div class="container">
+    <div class="mod-hdr">
+      <div class="mod-num">4</div>
+      <div class="mod-hdr-txt">
+        <div class="flex fw g3 mb4"><span class="badge b-red">Week 4</span><span class="badge b-amber">Design</span></div>
+        <h2>Design Your K–5 Tech-Integrated PBL Mini-Lesson</h2>
+        <div class="why-box">
+          <p><strong>Why this matters:</strong> This is where everything comes together. Using the PBL framework, the technology integration model, and the audit skills from earlier modules, you will design a complete mini-lesson ready for your own classroom. This is your final project — built with care, peer feedback, and real classroom purpose.</p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="goals mb6">
+      <li><span class="ck">✓</span>Design a complete K–5 tech-integrated PBL mini-lesson with all required components</li>
+      <li><span class="ck">✓</span>Write and justify a driving question appropriate for your grade level and context</li>
+      <li><span class="ck">✓</span>Select and justify technology tools for at least two PBL phases with explicit UDL connections</li>
+      <li><span class="ck">✓</span>Include formative and summative assessment plans and UDL supports for representation, expression, and engagement</li>
+    </ul>
+
+    <h3 class="mb4">Exemplar: Grade 5 Local Pollinators Project</h3>
+    <div class="card" style="border-top:4px solid var(--red);margin-bottom:22px">
+      <div class="flex fw g3 mb4">
+        <span class="badge b-red">Grade 5</span>
+        <span class="badge b-teal">Science + ELA + Art</span>
+        <span class="badge b-amber">4 Weeks</span>
+      </div>
+      <h4 style="font-size:1.1rem;margin-bottom:8px">Saving Our Local Pollinators: A Community Science Campaign</h4>
+      <p style="margin-bottom:16px"><strong>Driving Question:</strong> <em>"How can we, as community scientists, create a campaign to help local pollinators survive and thrive in our neighborhood?"</em></p>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button class="tab-btn active" onclick="switchTab(this,'m4-ov')">Overview</button>
+          <button class="tab-btn" onclick="switchTab(this,'m4-tech')">Tech Choices</button>
+          <button class="tab-btn" onclick="switchTab(this,'m4-udl')">UDL Supports</button>
+          <button class="tab-btn" onclick="switchTab(this,'m4-assess')">Assessment</button>
+        </div>
+        <div id="tab-m4-ov" class="tab-pane active">
+          <div class="grid-2">
+            <div>
+              <h4 style="font-size:.85rem;margin-bottom:8px">Standards Addressed</h4>
+              <ul style="font-size:.875rem;padding-left:16px;display:flex;flex-direction:column;gap:4px">
+                <li>NGSS 5-LS2-1 — Ecosystems and Interdependence</li>
+                <li>CCSS.ELA W.5.2 — Informational writing</li>
+                <li>CCSS.ELA SL.5.5 — Multimedia presentations</li>
+                <li>ISTE Standards: Knowledge Constructor, Creative Communicator</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-size:.85rem;margin-bottom:8px">Key Milestones</h4>
+              <div class="tl">
+                <div class="tl-item"><h4>Week 1</h4><p>Entry event, driving question launch, initial research</p></div>
+                <div class="tl-item"><h4>Week 2</h4><p>Field investigation, expert speaker, data collection</p></div>
+                <div class="tl-item"><h4>Week 3</h4><p>Campaign creation, peer critique, revision</p></div>
+                <div class="tl-item"><h4>Week 4</h4><p>Final product, community sharing event</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-m4-tech" class="tab-pane">
+          <div class="grid-2" style="gap:12px">
+            <div class="res-card"><span class="res-ico">🌿</span><div class="res-info"><h4>iNaturalist (Inquiry)</h4><p>Students photograph and log pollinator sightings in the school garden, contributing to real citizen science databases</p></div><span class="badge b-blue">Inquiry</span></div>
+            <div class="res-card"><span class="res-ico">🎨</span><div class="res-info"><h4>Canva for Education (Creation)</h4><p>Design pollinator field guides, infographic posters, and community campaign graphics</p></div><span class="badge b-teal">Creation</span></div>
+            <div class="res-card"><span class="res-ico">🎙</span><div class="res-info"><h4>Flip (Feedback)</h4><p>Video critique responses using "I notice / I wonder / I suggest" during gallery walks</p></div><span class="badge b-amber">Feedback</span></div>
+            <div class="res-card"><span class="res-ico">🌐</span><div class="res-info"><h4>Google Sites (Sharing)</h4><p>Student-built community science campaign website shared with neighborhood organizations</p></div><span class="badge b-purple">Sharing</span></div>
+          </div>
+        </div>
+        <div id="tab-m4-udl" class="tab-pane">
+          <div class="grid-3">
+            <div class="card"><h4>🧠 Representation</h4><ul style="font-size:.8rem;padding-left:14px;margin-top:8px;display:flex;flex-direction:column;gap:4px"><li>Read-aloud support in all digital texts</li><li>Visual vocabulary wall in Google Slides</li><li>Video + diagram resources alongside text</li></ul></div>
+            <div class="card"><h4>✍️ Expression</h4><ul style="font-size:.8rem;padding-left:14px;margin-top:8px;display:flex;flex-direction:column;gap:4px"><li>Product choice: poster, website, video, or podcast</li><li>Voice recording option for captions and labels</li><li>Drawing-to-communicate scaffolds in Seesaw</li></ul></div>
+            <div class="card"><h4>💡 Engagement</h4><ul style="font-size:.8rem;padding-left:14px;margin-top:8px;display:flex;flex-direction:column;gap:4px"><li>Student-chosen pollinator focus species</li><li>Real iNaturalist data from neighborhood</li><li>Community audience provides authentic purpose</li></ul></div>
+          </div>
+        </div>
+        <div id="tab-m4-assess" class="tab-pane">
+          <table class="rubric">
+            <thead><tr><th>Success Criterion</th><th>Meets Expectation</th><th>Approaching</th><th>Beginning</th></tr></thead>
+            <tbody>
+              <tr><td>Driving Question</td><td>Campaign clearly addresses the DQ with evidence from research</td><td>Campaign connects to DQ but evidence is limited</td><td>Campaign does not reference the driving question</td></tr>
+              <tr><td>Scientific Accuracy</td><td>3+ accurately described pollinator threats with cited sources</td><td>1–2 threats described; some inaccuracies present</td><td>Information is general, not specific to local pollinators</td></tr>
+              <tr><td>Tech Tool Use</td><td>Technology enhances communication; tool choice justified in reflection</td><td>Technology used but purpose is not explained</td><td>Technology use is decorative or not evident</td></tr>
+              <tr><td>Audience Awareness</td><td>Language, design, and format clearly suited to intended audience</td><td>Some audience awareness evident; inconsistent</td><td>No clear audience adaptation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-ghost btn-sm" href="https://www.edutopia.org/article/bringing-natural-world-students-pollinator-garden/" target="_blank" rel="noopener">Download Full Lesson Plan</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.canva.com/education/teachers/" target="_blank" rel="noopener">View Canva Template</a>
+      </div>
+    </div>
+
+    <div class="act-box mt8" style="background:linear-gradient(135deg,#FFF1F2,#FEF3C7);border-color:var(--red)">
+      <div class="act-lbl" style="background:var(--red)">🎯 Module 4 Activity — Final Design</div>
+      <h4>Design Your Own Tech-Integrated PBL Mini-Lesson</h4>
+      <p>Using the mini-lesson template and the success criteria below, design a complete tech-integrated PBL mini-lesson for your grade level. Begin with the driving question and work outward from there.</p>
+      <ol class="act-steps mt4">
+        <li>Write a compelling driving question for your grade level and topic — test it against the PBL criteria from Module 1</li>
+        <li>Identify 2–3 standards your mini-lesson addresses across subjects</li>
+        <li>Map your lesson to the four PBL phases and select a technology tool for at least two phases — justify each choice</li>
+        <li>Design a formative check-in and a final summative assessment with at least three success criteria</li>
+        <li>Add explicit UDL supports for representation, expression, and engagement</li>
+        <li>Participate in the peer feedback protocol below after submitting your draft</li>
+      </ol>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-red btn-sm" href="https://my.pblworks.org/resource/project-planner" target="_blank" rel="noopener">Download Mini-Lesson Template</a>
+        <a class="btn btn-ghost btn-sm" href="https://my.pblworks.org/projects" target="_blank" rel="noopener">View Grade-Level Examples</a>
+      </div>
+    </div>
+
+    <h3 class="mt8 mb4">Peer Feedback Protocol</h3>
+    <p class="mb4">After submitting your draft, you will receive two peer assignments. Use the structured protocol below — warm, specific, growth-focused feedback that makes the lesson better.</p>
+    <div class="fb-card">
+      <h4 style="margin-bottom:12px;color:var(--blue)">Peer Review Guiding Questions</h4>
+      <div class="fb-q">🟢 <strong>Glow:</strong> What is the strongest element of this lesson? Point to specific evidence in the plan.</div>
+      <div class="fb-q">🌱 <strong>Grow:</strong> Which success criterion is least clearly addressed? What specific change would strengthen it?</div>
+      <div class="fb-q">🔍 <strong>Driving Question:</strong> Is it open-ended, challenging, and connected to a real-world problem appropriate for the grade level? If not, suggest a revision.</div>
+      <div class="fb-q">💻 <strong>Tech Justification:</strong> Is each technology tool connected to a specific PBL phase and purpose? Is there a tool that seems decorative rather than essential?</div>
+      <div class="fb-q">🧩 <strong>UDL:</strong> What UDL supports are present? What population of learners might still face barriers — and how could those be addressed?</div>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-primary btn-sm" href="https://nsrfharmony.org/protocols-for-all/" target="_blank" rel="noopener">Submit Peer Feedback</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.nsrfharmony.org/wp-content/uploads/2017/10/Tuning-N_0.pdf" target="_blank" rel="noopener">Download Protocol PDF</a>
+      </div>
+    </div>
+
+    <div class="ref-box">
+      <div class="ref-lbl">💭 Final Module Reflection</div>
+      <p>"Now that you've designed your mini-lesson and received peer feedback, what is the most important revision you made — and why? In 200–250 words, describe how your lesson changed from draft to final version, and what you learned from the feedback process that you'll carry into your classroom PBL design work."</p>
+      <div class="mt4"><a class="btn btn-amber btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Post Final Reflection</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL PROJECT -->
+<section id="final-project" style="background:linear-gradient(135deg,#1a3560,#1E40AF);color:#fff;padding:80px 0">
+  <div class="container">
+    <div class="sh">
+      <span class="sh-label" style="background:rgba(255,255,255,.15);color:#fff">Course Culmination</span>
+      <h2 style="color:#fff">Final Project &amp; Deliverables</h2>
+      <p style="color:rgba(255,255,255,.8)">Your final project is assembled from four cumulative deliverables — one from each module.</p>
+    </div>
+
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-num">Deliverable 1 — Module 1</div>
+        <h4>PBL Sorting Task + Discussion Reflection</h4>
+        <p>Completed "PBL or Not PBL?" sorting task with written justification for each scenario, plus a 150–200 word reflection posted to the Module 1 discussion board.</p>
+        <div class="flex fw g3 mt4"><span class="badge b-blue">Discussion Post</span><span class="badge b-teal">150–200 words</span></div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-num">Deliverable 2 — Module 2</div>
+        <h4>Technology Tool Selection Chart</h4>
+        <p>A completed four-phase tool selection chart with justified tool choices for a specific grade level, including UDL connections for each phase.</p>
+        <div class="flex fw g3 mt4"><span class="badge b-amber">Chart Submission</span><span class="badge b-teal">With Justifications</span></div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-num">Deliverable 3 — Module 3</div>
+        <h4>Lesson Audit Analysis</h4>
+        <p>A completed six-dimension audit of the sample lesson with evidence, ratings, and specific improvement suggestions, plus a brief overall summary paragraph.</p>
+        <div class="flex fw g3 mt4"><span class="badge b-purple">Rubric-Based</span><span class="badge b-blue">6 Dimensions</span></div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-num">Deliverable 4 — Module 4 (Final)</div>
+        <h4>K–5 Tech-Integrated PBL Mini-Lesson</h4>
+        <p>A complete mini-lesson with: driving question, standards alignment, four-phase tech map with justifications, UDL supports, formative + summative assessment, and final reflection after peer feedback.</p>
+        <div class="flex fw g3 mt4"><span class="badge b-red">Major Project</span><span class="badge b-teal">Full Lesson Plan</span></div>
+      </div>
+    </div>
+
+    <div class="card mt8">
+      <h3 style="margin-bottom:14px">Mini-Lesson Success Criteria</h3>
+      <p style="margin-bottom:18px">Your final mini-lesson is evaluated against six criteria. Strong evidence of each = full credit.</p>
+      <div class="sc-grid">
+        <div class="sc-item"><div class="sc-lbl">✅ Driving Question</div><p>Open-ended, challenging, authentic, grade-appropriate, and directly connected to standards</p></div>
+        <div class="sc-item"><div class="sc-lbl">✅ Standards Alignment</div><p>Two or more standards addressed explicitly, with learning goals mapped to project phases</p></div>
+        <div class="sc-item"><div class="sc-lbl">✅ Tech Justification</div><p>Each tool connected to a specific PBL phase with written justification of purpose and UDL connection</p></div>
+        <div class="sc-item"><div class="sc-lbl">✅ UDL Supports</div><p>All three UDL principles addressed with at least one concrete strategy each</p></div>
+        <div class="sc-item"><div class="sc-lbl">✅ Assessment Plan</div><p>One formative check-in and a final summative rubric with at least three success criteria</p></div>
+        <div class="sc-item"><div class="sc-lbl">✅ Peer Feedback</div><p>Two reviews submitted using the protocol, plus one documented revision based on feedback received</p></div>
+      </div>
+      <div class="flex fw g3 mt6">
+        <a class="btn btn-primary" href="https://www.pblworks.org/blog/gold-standard-pbl-essential-project-design-elements" target="_blank" rel="noopener">Download Final Project Rubric</a>
+        <a class="btn btn-ghost" href="https://www.pblworks.org/handbook" target="_blank" rel="noopener">View Submission Guidelines</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION / NEXT STEPS -->
+<section id="next-steps" style="background:var(--bg);padding:80px 0">
+  <div class="container">
+    <div class="sh">
+      <span class="sh-label">Looking Ahead</span>
+      <h2>Reflection &amp; Next Steps</h2>
+      <p>Completing this course is a beginning, not an end. Here are ways to carry your learning into your classroom, school, and professional community.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="border-top:4px solid var(--blue)"><div style="font-size:1.75rem;margin-bottom:10px">🏫</div><h4>Take It to Your Classroom</h4><p style="margin-top:8px;font-size:.875rem">Implement your mini-lesson this semester. Start small — one driving question, one tech tool, one real audience. Document what happens and reflect on what to adjust.</p></div>
+      <div class="card" style="border-top:4px solid var(--teal)"><div style="font-size:1.75rem;margin-bottom:10px">👥</div><h4>Build a PLC Around PBL</h4><p style="margin-top:8px;font-size:.875rem">Share your mini-lesson with a colleague. Use the Module 4 peer feedback protocol as a PLC protocol for co-planning tech-integrated PBL units together.</p></div>
+      <div class="card" style="border-top:4px solid var(--amber)"><div style="font-size:1.75rem;margin-bottom:10px">📈</div><h4>Scale Up Your Design</h4><p style="margin-top:8px;font-size:.875rem">Expand your mini-lesson into a full multi-week unit. Add entry events, more student choice, a community audience, and a celebration of learning event.</p></div>
+      <div class="card" style="border-top:4px solid var(--purple)"><div style="font-size:1.75rem;margin-bottom:10px">📣</div><h4>Share Student Work</h4><p style="margin-top:8px;font-size:.875rem">Publish student projects on a class website or school blog. Invite families or community members to respond to student work authentically.</p></div>
+      <div class="card" style="border-top:4px solid var(--red)"><div style="font-size:1.75rem;margin-bottom:10px">🎓</div><h4>Continue Learning</h4><p style="margin-top:8px;font-size:.875rem">Explore PBLWorks certification, Deeper Learning Network, or district coaching pathways to deepen your PBL expertise and support colleagues.</p></div>
+      <div class="card" style="border-top:4px solid var(--muted)"><div style="font-size:1.75rem;margin-bottom:10px">💬</div><h4>Return to This Community</h4><p style="margin-top:8px;font-size:.875rem">Stay connected with your cohort. Post implementation updates, share student work, and celebrate wins in the ongoing course discussion space.</p></div>
+    </div>
+    <div class="ref-box mt8" style="background:linear-gradient(135deg,var(--blue-lt),var(--teal-lt));border-color:var(--blue)">
+      <div class="ref-lbl" style="background:var(--blue)">💭 Course Completion Reflection</div>
+      <p>"As you complete this course, consider: What is the most important shift in your thinking about PBL and technology? What do you now believe about teaching and learning that you didn't — or couldn't articulate — four weeks ago? In 250–300 words, write a final reflection to share with your cohort in the course closing discussion."</p>
+      <div class="flex fw g3 mt4">
+        <a class="btn btn-primary btn-sm" href="https://padlet.com/site/product/education" target="_blank" rel="noopener">Post Final Reflection</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.edutopia.org/project-based-learning" target="_blank" rel="noopener">View Cohort Reflections</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES / RESOURCES -->
+<section id="resources" style="background:var(--white);padding:80px 0">
+  <div class="container">
+    <div class="sh">
+      <span class="sh-label">Go Deeper</span>
+      <h2>References &amp; Resources</h2>
+      <p>Foundational texts, practitioner resources, and tool libraries to support your ongoing PBL practice.</p>
+    </div>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">📚 Foundational Readings &amp; Research <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Buck Institute for Education / PBLWorks. (2021). <em>Gold Standard PBL: Essential Project Design Elements.</em> Novato, CA: BIE. pblworks.org</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Larmer, J., Mergendoller, J., &amp; Boss, S. (2015). <em>Setting the Standard for Project Based Learning.</em> ASCD.</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Thomas, J. W. (2000). <em>A Review of Research on Project-Based Learning.</em> Autodesk Foundation.</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Krajcik, J., &amp; Shin, N. (2014). Project-based learning. In R. K. Sawyer (Ed.), <em>Cambridge Handbook of the Learning Sciences</em> (2nd ed., pp. 275–297). Cambridge University Press.</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Vega, V. (2015). Project-based learning research review. <em>Edutopia / George Lucas Educational Foundation.</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">💻 Technology Integration &amp; UDL Resources <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">CAST. (2018). <em>Universal Design for Learning Guidelines, Version 2.2.</em> Wakefield, MA: CAST. udlguidelines.cast.org</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Mishra, P., &amp; Koehler, M. J. (2006). Technological Pedagogical Content Knowledge. <em>Teachers College Record, 108</em>(6), 1017–1054.</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Puentedura, R. R. (2006). <em>Transformation, Technology, and Education.</em> (SAMR Model) hippasus.com</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">ISTE Standards for Students. (2016). International Society for Technology in Education. iste.org</li>
+          <li style="padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:.85rem">Hamilton, E., Rosenberg, J., &amp; Akcaoglu, M. (2016). The SAMR Model: A Critical Review. <em>TechTrends, 60</em>(5), 433–441.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">🌐 Practitioner Websites &amp; Toolkits <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <div class="grid-2" style="gap:12px">
+          <div class="res-card"><span class="res-ico">🏫</span><div class="res-info"><h4>PBLWorks — pblworks.org</h4><p>Lesson plan library, Gold Standard resources, and teacher certification pathways</p></div><a class="btn btn-ghost btn-sm" href="https://www.pblworks.org/" target="_blank" rel="noopener">Visit</a></div>
+          <div class="res-card"><span class="res-ico">📖</span><div class="res-info"><h4>Edutopia — edutopia.org</h4><p>Teacher-facing PBL strategies, implementation stories, and video resources</p></div><a class="btn btn-ghost btn-sm" href="https://www.edutopia.org/project-based-learning" target="_blank" rel="noopener">Visit</a></div>
+          <div class="res-card"><span class="res-ico">🧩</span><div class="res-info"><h4>CAST UDL Guidelines — udlguidelines.cast.org</h4><p>Complete UDL framework with practical strategies for each principle</p></div><a class="btn btn-ghost btn-sm" href="https://udlguidelines.cast.org/" target="_blank" rel="noopener">Visit</a></div>
+          <div class="res-card"><span class="res-ico">💡</span><div class="res-info"><h4>Common Sense Education</h4><p>Digital citizenship curriculum and classroom technology reviews for K–12 educators</p></div><a class="btn btn-ghost btn-sm" href="https://www.commonsense.org/education" target="_blank" rel="noopener">Visit</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-hdr" onclick="toggleAcc(this)">🛠 Featured Technology Tools Library <span class="acc-ico">▼</span></button>
+      <div class="acc-body">
+        <div class="grid-4" style="gap:12px">
+          <a class="tool-card" href="https://bookcreator.com/teachers/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">📚</div><h4>Book Creator</h4><p>bookcreator.com</p></a>
+          <a class="tool-card" href="https://www.canva.com/education/teachers/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🎨</div><h4>Canva Edu</h4><p>canva.com/education</p></a>
+          <a class="tool-card" href="https://info.flip.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🎙</div><h4>Flip</h4><p>flip.com</p></a>
+          <a class="tool-card" href="https://padlet.com/site/product/education" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">📋</div><h4>Padlet</h4><p>padlet.com</p></a>
+          <a class="tool-card" href="https://seesaw.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🌿</div><h4>Seesaw</h4><p>seesaw.com</p></a>
+          <a class="tool-card" href="https://www.inaturalist.org/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🌍</div><h4>iNaturalist</h4><p>inaturalist.org</p></a>
+          <a class="tool-card" href="https://www.wevideo.com/education" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🎬</div><h4>WeVideo</h4><p>wevideo.com</p></a>
+          <a class="tool-card" href="https://sites.google.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block"><div class="tool-ico">🌐</div><h4>Google Sites</h4><p>sites.google.com</p></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p><strong style="color:#fff">Tech-Integrated Project-Based Learning for K–5 Teachers</strong></p>
+    <p style="margin-top:6px">4-Week Asynchronous Professional Learning Course &nbsp;·&nbsp; Graduate Instructional Design Project</p>
+    <p style="margin-top:4px">Aligned to ISTE, NGSS, and CCSS Standards &nbsp;·&nbsp; Designed with Universal Design for Learning Principles</p>
+    <div class="ft-links">
+      <a href="#module1">Module 1</a>
+      <a href="#module2">Module 2</a>
+      <a href="#module3">Module 3</a>
+      <a href="#module4">Module 4</a>
+      <a href="#final-project">Final Project</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Accordion
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('show');
+  document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('show'));
+  document.querySelectorAll('.acc-hdr').forEach(h => h.classList.remove('open'));
+  if (!isOpen) { body.classList.add('show'); btn.classList.add('open'); }
+}
+
+// Tabs
+function switchTab(btn, id) {
+  const wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  wrap.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const pane = document.getElementById('tab-' + id);
+  if (pane) pane.classList.add('active');
+}
+
+// Sort activity toggle
+const PBL_ANSWERS = [false, true, false, true, false, true];
+function toggleSort(chip) {
+  chip.classList.toggle('sorted');
+  chip.style.background = chip.classList.contains('sorted') ? 'var(--teal-lt)' : '';
+  chip.style.borderColor = chip.classList.contains('sorted') ? 'var(--teal)' : '';
+}
+
+function revealAnswers() {
+  document.getElementById('answer-key').style.display = 'block';
+}
+
+// Nav active state on scroll
+const secs = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + cur) l.classList.add('active');
+  });
+}, {passive:true});
+
+// Button feedback for placeholder actions
+document.querySelectorAll('button.btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    if (this.dataset.clicked) return;
+    const orig = this.textContent;
+    this.dataset.clicked = '1';
+    this.textContent = '✓ ' + orig;
+    setTimeout(() => { this.textContent = orig; delete this.dataset.clicked; }, 1800);
+  });
+});
+</script>
+</body>
+</html>
