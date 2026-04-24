@@ -1,0 +1,22 @@
+# Keep this repo focused on the GitHub Pages site
+
+# macOS
+.DS_Store
+
+# Local agent/editor metadata
+.claude/
+.gitattributes
+.editorconfig
+
+# Non-site project files currently in this folder
+project.godot
+roblox/
+*.import
+
+# Allow the actual Pages site files
+!.gitignore
+!README.md
+!.nojekyll
+!index.html
+!icon.svg
+!CNAME
